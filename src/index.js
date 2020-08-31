@@ -7,10 +7,11 @@ import Age from './Age';
 import * as serviceWorker from './serviceWorker';
 import Clock from './HelloWorld';
 import Randomizer from './Randomizer';
+import Anagram from './Anagram';
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Randomizer/>
+    <Anagram/>
   </React.StrictMode>,
   document.getElementById('root')
 );

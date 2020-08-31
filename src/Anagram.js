@@ -4,48 +4,48 @@ class Anagram extends React.Component{
     constructor(props){
         super(props);
         this.state = { 
-            firstWord = '',
-            secondWord = '',
-            isAnagram = true
+            firstWord :'',
+            secondWord : '',
+            isAnagram : true
         };
     }
+    
+    handleChange = (event) =>{
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+     CheckIfAnagram = (e) =>{
+        e.preventDefault();
+        
+        var firstWordState = this.state.firstWord.split('').sort().join(''), 
+            secondWordState = this.state.secondWord.split('').sort().join('');
+        
+        if(firstWordState.length !== secondWordState.length){
+            this.state.isAnagram = false;
+        }
+        else{
+            this.state.isAnagram = (firstWordState === secondWordState) ? true : false;
+        }
+    
+        this.setState(() => ({
+            isAnagram : this.state.isAnagram
+        }));
+
 
     
-
-     CheckIfAnagram = () =>{
-        
-        if(firstWord.length != secondWord.length){
-            isAnagram = false;
-        }
-        
-        var n1 = firstWord.length;
-        firstWord = sort(firstWord);
-        secondWord = sort(secondWord);
-
-        for (var i = 0; i < firstWord.length; i++) 
-        {
-            if (firstWord[i] != secondWord[i]) 
-            isAnagram = false; 
-        }
 
     }
 
     render(){
-        // let isWordAnagram = this.isAnagram;
         return (
-            // <div>
-            //    <label>First Word:</label><input value = {this.state.firstWord}></input>
-            //    <label>Second Word:</label><input value = {this.state.secondWord}></input>
-            //    <button onClick={CheckIfAnagram}>Click to check if Anagram:</button>
-            // </div>
-
-            // <div>
-            //     <label>
-            //     isWordAnagram 
-            //      ? Anagram
-            //      : Not an anagram
-            //      </label>
-            // </div>
+            <div>
+               <label>First word:</label><input type = "text" name = "firstWord" value = {this.state.firstWord} onChange = {this.handleChange}></input>
+               <label>Second Word:</label><input  type = "text" name = "secondWord" value = {this.state.secondWord} onChange = {this.handleChange}></input>
+               <button onClick={(e) => this.CheckIfAnagram(e)}>Check if Anagram:</button>
+               <label> {this.state.isAnagram ? 'Anagram' : 'Not an anagram'}  </label>
+            </div>
         );
     }
 }
